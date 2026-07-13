@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Darshan — Engineer</title>
+<meta name="description" content="Designer and engineer. Software that gets out of the way.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#E8E8E3;      
+    --ink:#16181C;        
+    --ink-soft:#5C5F64;   
+    --whisper:#C7C7C0;    
+    --accent:#3D4E9E;     
+
+    --serif:"Newsreader",Georgia,serif;         
+    --sans:"Hanken Grotesk",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace; 
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html{-webkit-text-size-adjust:100%}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.5;
+    font-size:clamp(1rem,0.9rem + 0.4vw,1.15rem);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    padding:clamp(1.5rem,5vw,4.5rem);
+    max-width:1180px;
+    margin-inline:auto;
+    min-height:100vh;
+  }
+
+  .meta{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.02em;
+    color:var(--ink-soft);
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.4rem 1.6rem;
+    margin-bottom:clamp(2.5rem,7vh,4rem);
+  }
+  .meta b{font-weight:500;color:var(--ink)}
+  .meta .status{display:inline-flex;align-items:center;gap:0.5rem}
+  .meta .status::before{
+    content:"";width:6px;height:6px;border-radius:50%;
+    background:var(--accent);display:inline-block;flex-shrink:0;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.25}}
+
+  .now-live{
+    font-family:var(--mono);
+    margin-bottom:clamp(4rem,14vh,9rem);
+    opacity:0;
+    animation:rise 1s cubic-bezier(.2,.7,.2,1) 0.05s forwards;
+  }
+  
+  .now-live .nl-past{
+    opacity:0.5;
+    font-size:0.68rem;
+    color:var(--ink-soft);
+    margin-bottom:0.85rem;
+    padding-left:0.35rem;
+    letter-spacing:0.01em;
+    line-height:1.5;
+  }
+  .now-live .nl-past .sep{color:var(--whisper);padding:0 0.15rem}
+  .now-live .nl-date{
+    display:flex;align-items:center;gap:0.6rem;
+    font-size:0.92rem;color:var(--ink);font-weight:500;
+    letter-spacing:0.01em;margin-bottom:1.1rem;
+  }
+  .now-live .beat{
+    width:7px;height:7px;border-radius:50%;background:var(--accent);
+    display:inline-block;flex-shrink:0;
+    animation:pulse 3.2s ease-in-out infinite;
+  }
+  .now-live .nl-row{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:0.25rem 1.2rem;
+    text-decoration:none;color:var(--ink);
+    padding:0.5rem 0;
+  }
+  .now-live .nl-tag{
+    font-family:var(--mono);font-size:0.7rem;
+    text-transform:uppercase;letter-spacing:0.09em;color:var(--ink-soft);
+    width:7rem;flex-shrink:0;
+    transition:color .2s ease;
+  }
+  .now-live .nl-what{
+    font-family:var(--sans);font-size:1.1rem;color:var(--ink);
+    letter-spacing:-0.005em;line-height:1.35;
+    position:relative;padding-bottom:2px;max-width:48ch;
+  }
+  .now-live .nl-what::after{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;
+    background:var(--ink);transform:scaleX(0);transform-origin:left;
+    transition:transform .28s cubic-bezier(.2,.7,.2,1);
+  }
+  .now-live .nl-row:hover .nl-what,.now-live .nl-row:focus-visible .nl-what{color:var(--accent)}
+  .now-live .nl-row:hover .nl-tag,.now-live .nl-row:focus-visible .nl-tag{color:var(--accent)}
+  .now-live .nl-row:hover .nl-what::after,.now-live .nl-row:focus-visible .nl-what::after{background:var(--accent);transform:scaleX(1)}
+  .now-live .nl-row:focus-visible{outline:none}
+  @media(max-width:680px){
+    .now-live .nl-tag{width:100%}
+  }
+
+  .thesis{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(2.5rem,2rem + 6vw,6.2rem);
+    line-height:0.98;
+    letter-spacing:-0.02em;
+    max-width:16ch;
+    opacity:0;
+    transform:translateY(0.5em);
+    animation:rise 1.1s cubic-bezier(.2,.7,.2,1) 0.15s forwards;
+  }
+  
+  .thesis .build{
+    font-family:var(--mono);
+    font-weight:400;
+    font-size:0.82em;
+    letter-spacing:-0.03em;
+  }
+  .thesis .build::after{
+    content:"";
+    display:inline-block;
+    width:0.06em;height:0.9em;
+    background:var(--ink);
+    margin-left:0.06em;
+    vertical-align:-0.06em;
+    animation:blink 1.1s steps(1) 3;
+  }
+  @keyframes rise{to{opacity:1;transform:translateY(0)}}
+  @keyframes blink{50%{opacity:0}}
+
+  .lede{
+    font-family:var(--sans);
+    color:var(--ink-soft);
+    font-size:clamp(1.05rem,1rem + 0.5vw,1.35rem);
+    max-width:44ch;
+    margin-top:2rem;
+    opacity:0;
+    animation:rise 1.1s cubic-bezier(.2,.7,.2,1) 0.5s forwards;
+  }
+  .lede a{color:var(--ink)}
+
+  .claim{
+    font-family:var(--serif);
+    font-size:clamp(1.4rem,1.2rem + 1vw,2rem);
+    line-height:1.28;
+    letter-spacing:-0.015em;
+    max-width:26ch;
+    margin-top:clamp(3.5rem,10vh,6rem);
+    opacity:0;
+    animation:rise 1.1s cubic-bezier(.2,.7,.2,1) 0.75s forwards;
+  }
+  .claim .k{font-family:var(--mono);font-size:0.8em;letter-spacing:-0.02em}
+
+  .creds{
+    display:flex;flex-wrap:wrap;align-items:baseline;
+    gap:0.5rem 0.55rem;
+    margin-top:1.6rem;
+    font-family:var(--mono);
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    opacity:0;
+    animation:rise 1.1s cubic-bezier(.2,.7,.2,1) 0.9s forwards;
+  }
+  .creds a{
+    color:var(--ink);text-decoration:none;position:relative;padding-bottom:2px;
+    white-space:nowrap;
+  }
+  .creds a::after{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;
+    background:var(--ink);transform:scaleX(0);transform-origin:left;
+    transition:transform .28s cubic-bezier(.2,.7,.2,1);
+  }
+  .creds a:hover,.creds a:focus-visible{color:var(--accent);outline:none}
+  .creds a:hover::after,.creds a:focus-visible::after{background:var(--accent);transform:scaleX(1)}
+  .creds .sep{color:var(--whisper);user-select:none}
+
+  section{
+    display:grid;
+    grid-template-columns:8.5rem 1fr;
+    gap:0 clamp(1.5rem,4vw,3.5rem);
+    padding-top:clamp(3rem,7vh,5rem);
+  }
+  section:first-of-type{margin-top:clamp(4rem,14vh,9rem)}
+
+  .label{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    padding-top:0.55rem; 
+  }
+
+  .rows{display:flex;flex-direction:column}
+
+  .row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:0.15rem 0.9rem;
+    padding:0.85rem 0;
+    text-decoration:none;
+    color:var(--ink);
+    border-bottom:1px solid transparent;
+    transition:border-color .25s ease;
+  }
+  .row:not(:last-child){border-bottom-color:var(--whisper)}
+  .row .title{font-size:1.2rem;letter-spacing:-0.01em}
+  .row .ctx{color:var(--ink-soft);font-size:0.95rem}
+  .row .yr{
+    font-family:var(--mono);font-size:0.8rem;color:var(--ink-soft);
+    margin-left:auto;padding-left:1rem;
+  }
+  a.row:hover .title,a.row:focus-visible .title{color:var(--accent)}
+  a.row:hover,a.row:focus-visible{outline:none}
+  a.row .title{transition:color .2s ease}
+
+  .row .note{
+    flex-basis:100%;
+    color:var(--ink-soft);
+    font-size:0.95rem;
+    max-width:56ch;
+    margin-top:0.35rem;
+  }
+
+  .series{border-bottom:1px solid var(--whisper)}
+  .series:last-child{border-bottom:none}
+
+  .series-head{
+    
+    width:100%;
+    background:none;border:none;padding:1rem 0;margin:0;
+    font-family:inherit;color:var(--ink);text-align:left;cursor:pointer;
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:0.2rem 0.9rem;
+  }
+  .series-head .sig{
+    font-family:var(--mono);font-size:0.9rem;color:var(--ink-soft);
+    width:1.1rem;flex-shrink:0;transition:transform .3s cubic-bezier(.2,.7,.2,1),color .2s ease;
+  }
+  .series-head[aria-expanded="true"] .sig{transform:rotate(45deg)} 
+  .series-head .title{font-family:var(--serif);font-size:1.4rem;letter-spacing:-0.01em;transition:color .2s ease}
+  .series-head .gloss{color:var(--ink-soft);font-size:0.95rem;flex-basis:100%;padding-left:2rem;max-width:56ch}
+  .series-head .count{
+    font-family:var(--mono);font-size:0.78rem;color:var(--ink-soft);
+    margin-left:auto;padding-left:1rem;white-space:nowrap;
+  }
+  .series-head:hover .title,.series-head:focus-visible .title{color:var(--accent)}
+  .series-head:hover .sig,.series-head:focus-visible .sig{color:var(--accent)}
+  .series-head:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:2px}
+
+  .parts{
+    display:grid;grid-template-rows:0fr;
+    transition:grid-template-rows .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .series-head[aria-expanded="true"] + .parts{grid-template-rows:1fr}
+  .parts > div{overflow:hidden}
+
+  .part{
+    display:flex;align-items:baseline;gap:0.9rem;
+    padding:0.6rem 0 0.6rem 2rem;
+    text-decoration:none;color:var(--ink);
+  }
+  .part:last-child{padding-bottom:1.1rem}
+  .part .no{font-family:var(--mono);font-size:0.78rem;color:var(--ink-soft)}
+  .part .pt{font-size:1.02rem;letter-spacing:-0.01em;transition:color .2s ease}
+  .part .pd{font-family:var(--mono);font-size:0.76rem;color:var(--ink-soft);margin-left:auto}
+  .part:hover .pt,.part:focus-visible .pt{color:var(--accent)}
+  .part:focus-visible{outline:none}
+  .part:focus-visible .pt{text-decoration:underline;text-underline-offset:3px}
+
+  .worklist{display:flex;flex-direction:column}
+  .work{padding:1.2rem 0;border-bottom:1px solid var(--whisper)}
+  .work:first-child{padding-top:0.3rem}
+  .work:last-child{border-bottom:none}
+  .work-top{display:flex;align-items:baseline;gap:0.9rem}
+  .work .wtitle{font-family:var(--serif);font-size:1.35rem;letter-spacing:-0.01em;color:var(--ink)}
+  .work .wyr{font-family:var(--mono);font-size:0.78rem;color:var(--ink-soft);margin-left:auto;white-space:nowrap}
+  .work .wdesc{color:var(--ink-soft);font-size:0.98rem;line-height:1.45;max-width:54ch;margin-top:0.45rem}
+  .work .wmeta{display:flex;flex-wrap:wrap;align-items:baseline;gap:0.5rem 1.4rem;margin-top:0.75rem}
+  .work .wstack{font-family:var(--mono);font-size:0.76rem;color:var(--ink-soft)}
+  .work .wlinks{display:flex;flex-wrap:wrap;gap:0.4rem 1.1rem;margin-left:auto;font-family:var(--mono);font-size:0.8rem}
+  .work .wlinks a{color:var(--ink);text-decoration:none;position:relative;padding-bottom:2px;white-space:nowrap}
+  .work .wlinks a::after{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;
+    background:var(--ink);transform:scaleX(0);transform-origin:left;
+    transition:transform .28s cubic-bezier(.2,.7,.2,1);
+  }
+  .work .wlinks a:hover,.work .wlinks a:focus-visible{color:var(--accent);outline:none}
+  .work .wlinks a:hover::after,.work .wlinks a:focus-visible::after{background:var(--accent);transform:scaleX(1)}
+  @media(max-width:680px){
+    .work .wlinks{margin-left:0;flex-basis:100%}
+  }
+
+  .now p{max-width:52ch}
+  .now .date{font-family:var(--mono);font-size:0.8rem;color:var(--ink-soft);display:block;margin-bottom:0.4rem}
+
+  .links{display:flex;flex-wrap:wrap;gap:0.6rem 1.8rem;font-family:var(--mono);font-size:0.9rem;padding-top:0.4rem}
+  .links a{
+    color:var(--ink);text-decoration:none;position:relative;
+    padding-bottom:2px;
+  }
+  .links a::after{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;
+    background:var(--ink);transform:scaleX(0);transform-origin:left;
+    transition:transform .28s cubic-bezier(.2,.7,.2,1);
+  }
+  .links a:hover,.links a:focus-visible{color:var(--accent);outline:none}
+  .links a:hover::after,.links a:focus-visible::after{background:var(--accent);transform:scaleX(1)}
+
+  footer{
+    grid-column:1/-1;
+    margin-top:clamp(5rem,14vh,9rem);
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+  }
+
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+  @media(max-width:680px){
+    section{grid-template-columns:1fr;gap:0.6rem}
+    .label{padding-top:0}
+    .row .yr{margin-left:0;width:100%;padding-left:0}
+    .meta{gap:0.4rem 1.1rem}
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    .thesis,.lede,.claim,.creds,.now-live{opacity:1;transform:none;animation:none}
+    .status::before,.thesis .build::after,.now-live .beat{animation:none}
+    *{transition:none !important}
+  }
+</style>
+</head>
+<body>
+
+  <header class="meta">
+    <span><b>Darshan</b></span>
+    <span>Engineer</span>
+    <span>Remote</span>
+    <span class="status">Open to good problems</span>
+  </header>
+
+  <div class="now-live" id="nowLive">
+    <div class="nl-past">Yesterday &middot; Yesterday&rsquo;s reading <span class="sep">/</span> Yesterday&rsquo;s video</div>
+    <div class="nl-date"><span class="beat" aria-hidden="true"></span><span class="nl-day">Today</span></div>
+    <a class="nl-row" href="#" target="_blank" rel="noopener"><span class="nl-tag">Today&rsquo;s read</span><span class="nl-what">The paper or article you&rsquo;re on</span></a>
+    <a class="nl-row" href="#" target="_blank" rel="noopener"><span class="nl-tag">Today&rsquo;s watch</span><span class="nl-what">The talk or video you watched</span></a>
+  </div>
+
+  <h1 class="thesis">Make it work. Then make it <span class="build">boring.</span></h1>
+
+  <p class="lede">I&rsquo;m <b>Darshan</b>. I build software that keeps working.</p>
+
+  <section>
+    <div class="label">Work</div>
+    <div class="worklist">
+
+      <div class="work">
+        <div class="work-top">
+          <span class="wtitle">[Flagship project]</span>
+          <span class="wyr">2026</span>
+        </div>
+        <p class="wdesc">One honest line on what it does and the problem it kills &mdash; the outcome, not the to-do list.</p>
+        <div class="wmeta">
+          <span class="wstack">Go &middot; Kubernetes &middot; AWS</span>
+          <span class="wlinks">
+            <a href="#" target="_blank" rel="noopener">↗ Live</a>
+            <a href="#" target="_blank" rel="noopener">↗ Code</a>
+          </span>
+        </div>
+      </div>
+
+      <div class="work">
+        <div class="work-top">
+          <span class="wtitle">[Second project]</span>
+          <span class="wyr">2025</span>
+        </div>
+        <p class="wdesc">What it does, in one clause. If there&rsquo;s a number &mdash; scale, latency, cost saved &mdash; it goes here.</p>
+        <div class="wmeta">
+          <span class="wstack">Terraform &middot; GCP &middot; Python</span>
+          <span class="wlinks">
+            <a href="#" target="_blank" rel="noopener">↗ Code</a>
+          </span>
+        </div>
+      </div>
+
+      <div class="work">
+        <div class="work-top">
+          <span class="wtitle">[Third project]</span>
+          <span class="wyr">2024</span>
+        </div>
+        <p class="wdesc">The one that taught you something. Keep it, even if it&rsquo;s small &mdash; range matters.</p>
+        <div class="wmeta">
+          <span class="wstack">Rust &middot; gRPC</span>
+          <span class="wlinks">
+            <a href="#" target="_blank" rel="noopener">↗ Code</a>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="label">Writing</div>
+    <div class="rows" id="writing">
+
+      <div class="series">
+        <button class="series-head" aria-expanded="false" aria-controls="s1">
+          <span class="sig" aria-hidden="true">+</span>
+          <span class="title">Building [the project] from scratch</span>
+          <span class="count">4 parts · 2026</span>
+          <span class="gloss">What the whole thing was, and everything I got wrong before it worked.</span>
+        </button>
+        <div class="parts"><div id="s1">
+          <a class="part" href="#"><span class="no">01</span><span class="pt">Why I built it, and what it had to do</span><span class="pd">Jun 2026</span></a>
+          <a class="part" href="#"><span class="no">02</span><span class="pt">The architecture, and the one decision I&rsquo;d redo</span><span class="pd">Jun 2026</span></a>
+          <a class="part" href="#"><span class="no">03</span><span class="pt">The part that took three rewrites</span><span class="pd">Jul 2026</span></a>
+          <a class="part" href="#"><span class="no">04</span><span class="pt">Shipping it, and what I&rsquo;d tell past me</span><span class="pd">Jul 2026</span></a>
+        </div></div>
+      </div>
+
+      <div class="series">
+        <button class="series-head" aria-expanded="false" aria-controls="s2">
+          <span class="sig" aria-hidden="true">+</span>
+          <span class="title">[Second series title]</span>
+          <span class="count">3 parts · 2025</span>
+          <span class="gloss">A deep dive into the thing you learned properly, split so it&rsquo;s actually readable.</span>
+        </button>
+        <div class="parts"><div id="s2">
+          <a class="part" href="#"><span class="no">01</span><span class="pt">First part of the second series</span><span class="pd">Dec 2025</span></a>
+          <a class="part" href="#"><span class="no">02</span><span class="pt">Second part, going deeper</span><span class="pd">Dec 2025</span></a>
+          <a class="part" href="#"><span class="no">03</span><span class="pt">Where it all comes together</span><span class="pd">Jan 2026</span></a>
+        </div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="label">Elsewhere</div>
+    <div class="links">
+      <a href="mailto:hi@dxrsh.com">hi@dxrsh.com</a>
+      <a href="https://github.com/Dxrshn" target="_blank" rel="noopener">↗ GitHub</a>
+      <a href="https://x.com/dxrshx" target="_blank" rel="noopener">↗ X</a>
+      <a href="#">↓ Résumé</a>
+    </div>
+    <footer>
+      <span>Darshan</span>
+      <span>2026</span>
+    </footer>
+  </section>
+
+  <script>
+    document.querySelectorAll('.series-head').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+      });
+    });
+
+    (function(){
+      var NOW_SOURCE = "https://raw.githubusercontent.com/Dxrshn/dxrsh/main/now.json";
+
+      var FALLBACK = {
+        date: "2026-07-12",
+        read:  { title: "The paper or article you\u2019re on", url: "#" },
+        watch: { title: "The talk or video you watched", url: "#" },
+        yesterday: {
+          read:  { title: "Yesterday\u2019s reading", url: "#" },
+          watch: { title: "Yesterday\u2019s video", url: "#" }
+        }
+      };
+
+      var DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+      var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+      function dayLine(dateStr){
+        var p = dateStr.split("-");
+        var d = new Date(+p[0], (+p[1]) - 1, +p[2]);
+        return DAYS[d.getDay()] + " \u00b7 " + MONTHS[d.getMonth()] + " " + d.getDate();
+      }
+      function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
+        return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
+
+      function row(tag, item){
+        if (!item || !item.title) return "";
+        var link = item.url && item.url !== "#";
+        var open = link ? ' href="' + esc(item.url) + '" target="_blank" rel="noopener"' : ' href="#"';
+        return '<a class="nl-row"' + open + '>' +
+                 '<span class="nl-tag">' + tag + '</span>' +
+                 '<span class="nl-what">' + esc(item.title) + '</span>' +
+               '</a>';
+      }
+      function render(d){
+        if (!d || !d.date) return;
+        var el = document.getElementById("nowLive");
+        if (!el) return;
+
+        var past = "";
+        if (d.yesterday && (d.yesterday.read || d.yesterday.watch)) {
+          var bits = [];
+          if (d.yesterday.read && d.yesterday.read.title)  bits.push(esc(d.yesterday.read.title));
+          if (d.yesterday.watch && d.yesterday.watch.title) bits.push(esc(d.yesterday.watch.title));
+          past = '<div class="nl-past">Yesterday &middot; ' +
+                   bits.join(' <span class="sep">/</span> ') +
+                 '</div>';
+        }
+
+        el.innerHTML =
+          past +
+          '<div class="nl-date"><span class="beat" aria-hidden="true"></span>' +
+            '<span class="nl-day">' + esc(dayLine(d.date)) + '</span></div>' +
+          row("Today\u2019s read", d.read) +
+          row("Today\u2019s watch", d.watch);
+      }
+
+      if (NOW_SOURCE) {
+        fetch(NOW_SOURCE + (NOW_SOURCE.indexOf("?") < 0 ? "?" : "&") + "t=" + Date.now())
+          .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+          .then(render)
+          .catch(function(){ render(FALLBACK); });
+      } else {
+        render(FALLBACK);
+      }
+    })();
+  </script>
+
+</body>
+</html>

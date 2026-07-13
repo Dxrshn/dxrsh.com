@@ -1,0 +1,9 @@
+{
+  "date": "2026-07-13",
+  "read":  { "title": "Today's paper or article goes here", "url": "#" },
+  "watch": { "title": "Today's talk or video goes here", "url": "#" },
+  "yesterday": {
+    "read":  { "title": "Yesterday's read", "url": "#" },
+    "watch": { "title": "Yesterday's watch", "url": "#" }
+  }
+}
