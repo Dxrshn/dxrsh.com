@@ -1,7 +1,7 @@
 {
-  "date": "2026-07-13",
-  "read":  { "title": "Today's paper or article goes here", "url": "#" },
-  "watch": { "title": "Today's talk or video goes here", "url": "#" },
+  "date": "2026-07-15",
+  "read":  { "title": "Building Service Topology at Scale: Architecture, Challenges, and Lessons Learned", "url": "https://netflixtechblog.com/building-service-topology-at-scale-architecture-challenges-and-lessons-learned-f4b792f3f0d8" },
+  "watch": { "title": "Don't Ship Skills Without Evals — Philipp Schmid, Google DeepMind", "url": "https://www.youtube.com/watch?v=0vphxNt4wyk" },
   "yesterday": {
     "read":  { "title": "Yesterday's read", "url": "#" },
     "watch": { "title": "Yesterday's watch", "url": "#" }
